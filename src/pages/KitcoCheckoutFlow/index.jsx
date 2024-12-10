@@ -114,7 +114,7 @@ export default function KitcoCheckoutFlowPage() {
         date_of_birth,
         password: formData.password,
       };
-
+      
       try {
         const response = await createUser(userData);
         setAlert({
@@ -122,9 +122,7 @@ export default function KitcoCheckoutFlowPage() {
           title: response.title,
           message: response.description,
         });
-        setTimeout(() => {
-          setAlert(null);
-        }, 3000);
+        
         if (response.success) {
           // Reset form on success
           setFormData({
@@ -145,6 +143,9 @@ export default function KitcoCheckoutFlowPage() {
           message: "An unexpected error occurred",
         });
       }
+      setTimeout(() => {
+        setAlert(null);
+      }, 3000);
     }
   };
 
@@ -641,7 +642,7 @@ export default function KitcoCheckoutFlowPage() {
                 </Heading>
               </div>
             )}
-            {(alert?.type === "error" || true) && (
+            {alert?.type === "error" && (
               <div className="absolute top-[95] right-[65px]  md:right-[5px] md:max-w-[35%] md:absolute sm:max-w-[80%] sm:left-[50px] sm:top-[650px] ml-[-2.25rem] mt-[2.88rem] flex w-[32%] items-center gap-[0.63rem] rounded bg-[#f0c2c0] opacity-0.5 px-[2.00rem] py-[1.5rem] md:ml-0 md:w-full sm:p-[1.25rem]">
                 <img src={ErrorIcon} alt="account not created." />
                 <Heading
