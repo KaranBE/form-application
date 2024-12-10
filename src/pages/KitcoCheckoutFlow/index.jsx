@@ -1,35 +1,12 @@
 import { Helmet } from "react-helmet";
 import CheckoutFlowSection from "./CheckoutFlowSection";
-import { Button, Heading, Input, SelectBox, Text } from "../../components";
+import {  Heading, Input, Text } from "../../components";
 import { useState } from "react";
 import { createUser } from "../../utils/api";
-import CheckedIcon from "../../assets/ic_outline-info.svg";
-import ErrorIcon from "../../assets/x-circle.svg";
-// Add these constants at the top
-const MONTHS = [
-  { label: "January", value: "01" },
-  { label: "February", value: "02" },
-  { label: "March", value: "03" },
-  { label: "April", value: "04" },
-  { label: "May", value: "05" },
-  { label: "June", value: "06" },
-  { label: "July", value: "07" },
-  { label: "August", value: "08" },
-  { label: "September", value: "09" },
-  { label: "October", value: "10" },
-  { label: "November", value: "11" },
-  { label: "December", value: "12" },
-];
 
-const DAYS = Array.from({ length: 31 }, (_, i) => ({
-  label: String(i + 1),
-  value: String(i + 1).padStart(2, "0"),
-}));
-
-const YEARS = Array.from({ length: 100 }, (_, i) => ({
-  label: String(new Date().getFullYear() - i),
-  value: String(new Date().getFullYear() - i),
-}));
+import { Alert } from "../../components/Alert";
+import { DatePicker } from "../../components/DatePicker";
+import { FormActions } from "../../components/FormActions";
 
 export default function KitcoCheckoutFlowPage() {
   const [formData, setFormData] = useState({
@@ -45,7 +22,7 @@ export default function KitcoCheckoutFlowPage() {
     confirm_password: "",
   });
   const [errors, setErrors] = useState({});
-  const [alert, setAlert] = useState();
+  const [alert, setAlert] = useState({});
   const validateForm = () => {
     const newErrors = {};
 
@@ -338,82 +315,7 @@ export default function KitcoCheckoutFlowPage() {
                     >
                       Birthdate
                     </Heading>
-                    <div className="flex gap-[1.50rem] self-stretch relative">
-                      <SelectBox
-                        shape="round"
-                        name="day"
-                        value={formData.birthdate.day}
-                        onChange={(value) =>
-                          handleChange({ target: { name: "day", value } })
-                        }
-                        placeholder=""
-                        options={DAYS}
-                        className={`w-full gap-[1.13rem] rounded !border px-[0.88rem] tracking-[0.00rem] sm:w-full ${
-                          errors.birthdate && !formData.birthdate.day
-                            ? "border-red-400"
-                            : ""
-                        }`}
-                      />
-                      {!formData.birthdate.day && (
-                        <span
-                          className="absolute left-[0.75rem] sm:text-xs top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 transition-all
-                      peer-focus:text-[0.75rem] peer-focus:top-[0.5rem]
-                      peer-valid:text-[0.75rem] peer-valid:top-[0.5rem]"
-                        >
-                          Day <span className="text-red-400">*</span>
-                        </span>
-                      )}
-
-                      <SelectBox
-                        shape="round"
-                        name="month"
-                        value={formData.birthdate.month}
-                        onChange={(value) =>
-                          handleChange({ target: { name: "month", value } })
-                        }
-                        placeholder=""
-                        options={MONTHS}
-                        className={`w-full gap-[1.13rem] rounded !border px-[0.88rem] tracking-[0.00rem] sm:w-full ${
-                          errors.birthdate && !formData.birthdate.month
-                            ? "border-red-400"
-                            : ""
-                        }`}
-                      />
-                      {!formData.birthdate.month && (
-                        <span
-                          className="absolute left-[9.95rem] sm:left-[120px] sm:text-xs top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 transition-all
-                      peer-focus:text-[0.75rem] peer-focus:top-[0.5rem]
-                      peer-valid:text-[0.75rem] peer-valid:top-[0.5rem]"
-                        >
-                          Month <span className="text-red-400">*</span>
-                        </span>
-                      )}
-
-                      <SelectBox
-                        shape="round"
-                        name="year"
-                        value={formData.birthdate.year}
-                        onChange={(value) =>
-                          handleChange({ target: { name: "year", value } })
-                        }
-                        placeholder=""
-                        options={YEARS}
-                        className={`w-full gap-[1.13rem] rounded !border px-[0.88rem] tracking-[0.00rem] sm:w-full ${
-                          errors.birthdate && !formData.birthdate.year
-                            ? "border-red-400"
-                            : ""
-                        }`}
-                      />
-                      {!formData.birthdate.year && (
-                        <span
-                          className="absolute left-[19.55rem] sm:left-[230px] sm:text-xs top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 transition-all
-                      peer-focus:text-[0.75rem] peer-focus:top-[0.5rem]
-                      peer-valid:text-[0.75rem] peer-valid:top-[0.5rem]"
-                        >
-                          Year <span className="text-red-400">*</span>
-                        </span>
-                      )}
-                    </div>
+                    <DatePicker onChange={handleChange} values={formData.birthdate} errors={errors} />
                     <div className="flex flex-row align-top  gap-[4.0rem] w-full">
                       {errors.birthdate && (
                         <p className="text-red-700 text-[0.75rem]">
@@ -610,50 +512,9 @@ export default function KitcoCheckoutFlowPage() {
                   </div>
                 </div>
               </div>
-              <div className="mx-[5.25rem] flex sm:flex-col gap-[1.00rem] md:mx-0">
-                <Button
-                  shape="round"
-                  className="w-full rounded-md !border px-[2.06rem] tracking-[0.00rem]"
-                >
-                  {" "}
-                  Cancel
-                </Button>
-                <Button
-                  color="cyan_800"
-                  variant="fill"
-                  shape="round"
-                  className="w-full rounded-md px-[2.13rem] tracking-[0.00rem] sm:px-[1.25rem]"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
-              </div>
+              <FormActions onSubmit={handleSubmit} onCancel={()=>{}}/>
             </div>
-
-            {alert?.type === "success" && (
-              <div className="absolute top-[95] right-[65px] md:right-[5px] md:max-w-[35%] md:absolute sm:max-w-[80%] sm:left-[50px] sm:top-[650px]  ml-[-2.25rem] mt-[2.88rem] flex w-[32%] items-center gap-[0.63rem] rounded bg-green-a100 px-[2.00rem] py-[1.5rem] md:ml-0 md:w-full sm:p-[1.25rem]">
-                <img src={CheckedIcon} alt="account created." />
-                <Heading
-                  size="headingmd"
-                  as="h6"
-                  className="text-[1.13rem] font-bold text-grey_7"
-                >
-                  User account successfully created.{""}
-                </Heading>
-              </div>
-            )}
-            {alert?.type === "error" && (
-              <div className="absolute top-[95] right-[65px]  md:right-[5px] md:max-w-[35%] md:absolute sm:max-w-[80%] sm:left-[50px] sm:top-[650px] ml-[-2.25rem] mt-[2.88rem] flex w-[32%] items-center gap-[0.63rem] rounded bg-[#f0c2c0] opacity-0.5 px-[2.00rem] py-[1.5rem] md:ml-0 md:w-full sm:p-[1.25rem]">
-                <img src={ErrorIcon} alt="account not created." />
-                <Heading
-                  size="headingmd"
-                  as="h6"
-                  className="text-[1.13rem] font-bold text-grey_7"
-                >
-                  There was an error creating the account.{""}
-                </Heading>
-              </div>
-            )}
+            {alert?.type && <Alert type={alert?.type} />}
             
           </div>
         </div>
