@@ -1,0 +1,88 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --black_900_14: #00000014;
+    --blue_gray_700: #4d5c6f;
+    --blue_gray_900: #2c3642;
+    --blue_gray_900_01: #252f3d;
+    --blue_gray_900_02: #2c3541;
+    --blue_gray_900_03: #293343;
+    --cyan_800: #127c95;
+    --deep_orange_100: #ffbfbf;
+    --green_a100: #cdf9dc;
+    --grey_7: #333333;
+    --outline: #a5b6cd;
+    --red_400: #cf4055;
+    --red_700: #da1e28;
+    --teal: #4790a1;
+    --white: #ffffff;
+    --shadow-xs: 0 4px 30px 0 #00000014;
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    /*------Spacing variables------*/
+    --space-xs: 0.25rem;
+    --space-sm: 0.63rem;
+    --space-md: 0.75rem;
+    --space-lg: 0.88rem;
+    --space-xl: 1rem;
+    --space-2x1: 1.13rem;
+    --space-3x1: 1.5rem;
+    --space-4x1: 2.5rem;
+    --space-5x1: 2.75rem;
+  }
+
+  [type='text'],
+  input:where(:not([type])),
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea,
+  select {
+    appearance: none;
+    background-color: transparent;
+    border-color: unset;
+    border-width: 0;
+    border-radius: unset;
+    padding: unset;
+    font-size: unset;
+    line-height: unset;
+  }
+
+  [type='text']:focus,
+  [type='email']:focus,
+  [type='url']:focus,
+  [type='password']:focus,
+  [type='number']:focus,
+  [type='date']:focus,
+  [type='search']:focus,
+  [multiple]:focus,
+  textarea:focus,
+  select:focus {
+    --tw-ring-color: transparent;
+    border-color: transparent;
+
+    [type='radio']:focus,
+    [type='checkbox']:focus {
+      --tw-ring-color: transparent;
+    }
+  }
+}
+
+@layer components {
+  .container-xs {
+    @apply w-full mx-auto max-w-[80.00rem];
+  }
+}
