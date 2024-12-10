@@ -210,7 +210,7 @@ export default function KitcoCheckoutFlowPage() {
                     </Heading>
                   </div>
                 </div>
-                <div className="min-w-[500px] sm:min-w-[350px] flex flex-col gap-[1.00rem] md:rounded-lg sm:rounded-none sm:shadow-none bg-white p-[2.50rem] md:shadow-xs sm:p-[1.25rem]">
+                <div className="min-w-[500px] sm:min-w-[350px] flex flex-col gap-[1.00rem] rounded-lg shadow-xs sm:shadow-none  bg-white p-[2.50rem] sm:p-[1.25rem]">
                   <div className="flex flex-col items-start gap-[0.63rem]">
                     <Heading
                       as="h3"
