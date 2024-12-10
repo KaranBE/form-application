@@ -3,7 +3,8 @@ import CheckoutFlowSection from "./CheckoutFlowSection";
 import { Button, Heading, Input, SelectBox, Text } from "../../components";
 import { useState } from "react";
 import { createUser } from "../../utils/api";
-
+import CheckedIcon from "../../assets/ic_outline-info.svg";
+import ErrorIcon from "../../assets/x-circle.svg";
 // Add these constants at the top
 const MONTHS = [
   { label: "January", value: "01" },
@@ -630,6 +631,7 @@ export default function KitcoCheckoutFlowPage() {
 
             {alert?.type === "success" && (
               <div className="absolute top-[95] right-[65px] md:right-[5px] md:max-w-[35%] md:absolute sm:max-w-[80%] sm:left-[50px] sm:top-[650px]  ml-[-2.25rem] mt-[2.88rem] flex w-[32%] items-center gap-[0.63rem] rounded bg-green-a100 px-[2.00rem] py-[1.5rem] md:ml-0 md:w-full sm:p-[1.25rem]">
+                <img src={CheckedIcon} alt="account created." />
                 <Heading
                   size="headingmd"
                   as="h6"
@@ -639,8 +641,9 @@ export default function KitcoCheckoutFlowPage() {
                 </Heading>
               </div>
             )}
-            {alert?.type === "error" && (
+            {(alert?.type === "error" || true) && (
               <div className="absolute top-[95] right-[65px]  md:right-[5px] md:max-w-[35%] md:absolute sm:max-w-[80%] sm:left-[50px] sm:top-[650px] ml-[-2.25rem] mt-[2.88rem] flex w-[32%] items-center gap-[0.63rem] rounded bg-[#f0c2c0] opacity-0.5 px-[2.00rem] py-[1.5rem] md:ml-0 md:w-full sm:p-[1.25rem]">
+                <img src={ErrorIcon} alt="account not created." />
                 <Heading
                   size="headingmd"
                   as="h6"
